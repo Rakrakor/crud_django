@@ -1,0 +1,43 @@
+{% extends "crudapp/base.html" %}
+{% load static %}
+
+{% block processing %}
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+    alert('{{msg}}')
+    </script>
+    {% endfor %}
+{% endif %}
+
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-striped table-hover">
+        <thead>
+            <th>#</th>
+            <th>ACC</th>
+            <th>City</th>
+            <th>Airport</th>
+            <th>Action</th>
+
+        </thead>
+        <tbody>
+        {% for a in airport_object_list %}
+           <tr>
+               <td><strong>{{forloop.counter}} </strong></td>
+               <td><strong>{{a.acronym}}</strong></td>
+               <td><strong>{{a.city}}</strong></td>
+               <td>{{ a.airport}}</td>
+               <td>
+                    <a href="{% url 'updateairportdetails' a.pk %}" class="btn btn-primary">Update Airport</a>
+                    <a href="{% url 'deleteairport' a.pk %}" class="btn btn-danger">Delete Airport</a>
+               </td>
+           </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    <div>
+</div>
+
+    {% endblock processing %}
